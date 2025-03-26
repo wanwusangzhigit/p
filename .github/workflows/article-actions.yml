@@ -1,0 +1,36 @@
+name: Article Actions
+
+on:
+  push:
+    branches: [main] # 当代码推送到main分支时触发
+  pull_request:
+    branches: [main] # 当提交拉取请求到main分支时触发
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  article-action:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      
+    - name: 设置Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: 安装依赖
+      run: npm install
+      working-directory: ./wanwusangzhi
+    
+    - name: 执行文章操作
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        node scripts/article-actions.js \
+          --action ${{ inputs.action }} \
+          --articleId ${{ inputs.articleId }} \
+          --title "$${{ inputs.title }}" \
+          --content "$${{ inputs.content }}" \
+          --path "$${{ inputs.path }}"
