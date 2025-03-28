@@ -4,7 +4,7 @@ const path = require('path');
 
 // 配置Octokit客户端
 const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN
+    auth: process.env.MY_GITHUB_TOKEN
 });
 
 async function main() {
