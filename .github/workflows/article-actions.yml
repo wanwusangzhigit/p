@@ -23,6 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: ./path/to/project # 如果 package.json 不在根目录，请指定正确的路径
 
     - name: Run article actions
       env:
@@ -33,3 +34,4 @@ jobs:
         CONTENT: ${{ github.event.inputs.content }}
         PATH: ${{ github.event.inputs.path }}
       run: node scripts/article-actions.js
+      working-directory: ./path/to/project # 如果项目文件不在根目录，请指定正确的路径
