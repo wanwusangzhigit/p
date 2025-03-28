@@ -3,17 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+# Site
+title: 玩物丧稚 	#标题
+subtitle: 'wanwusangzhi'	#副标题
+description: 点燃执着的信念,燃烧无悔的青春	#个性签名
 keywords:
-author: John Doe
-language: en
-timezone: ''
+author: 源梦初醒	#作者
+language: zh-CN	#语言
+timezone: Asia/Shanghai    #中国的时区
+
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://p.wanwusangzhi.top
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -45,7 +47,8 @@ relative_link: false
 future: true
 syntax_highlighter: highlight.js
 highlight:
-  line_number: true
+  enable: false
+  line_number: false
   auto_detect: false
   tab_replace: ''
   wrap: true
@@ -59,6 +62,10 @@ prismjs:
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
+lazyload:
+  enable: true
+  loadingImg: /img/loading.gif
+
 index_generator:
   path: ''
   per_page: 10
