@@ -7,6 +7,34 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      action:
+        description: '操作类型'
+        required: true
+        default: 'publish'
+        type: choice
+        options:
+          - publish
+          - update
+          - delete
+      articleId:
+        description: '文章ID'
+        required: false
+        type: string
+      title:
+        description: '文章标题'
+        required: false
+        type: string
+      content:
+        description: '文章内容'
+        required: false
+        type: string
+      path:
+        description: '文章保存路径'
+        required: false
+        type: string
+        default: 'articles'
 
 jobs:
   article-action:
@@ -14,24 +42,24 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '18'
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./path/to/project # 如果 package.json 不在根目录，请指定正确的路径
+      working-directory: ./ # 确保在项目根目录下安装依赖
 
     - name: Run article actions
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        ACTION: ${{ github.event.action }}
+        ACTION: ${{ github.event.inputs.action }}
         ARTICLE_ID: ${{ github.event.inputs.articleId }}
         TITLE: ${{ github.event.inputs.title }}
         CONTENT: ${{ github.event.inputs.content }}
         PATH: ${{ github.event.inputs.path }}
       run: node scripts/article-actions.js
-      working-directory: ./path/to/project # 如果项目文件不在根目录，请指定正确的路径
+      working-directory: ./ # 确保在项目根目录下运行脚本
